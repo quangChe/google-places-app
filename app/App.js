@@ -22,6 +22,7 @@ export default class App extends Component {
       'Light': require('./assets/fonts/SFProDisplay-Light.ttf'),
       'Regular': require('./assets/fonts/SFProDisplay-Regular.ttf'),
       'Medium': require('./assets/fonts/SFProDisplay-Medium.ttf'),
+      'Bold': require('./assets/fonts/SFProDisplay-Bold.ttf'),
     });
     this.setState({ fontLoaded: true });
   } 

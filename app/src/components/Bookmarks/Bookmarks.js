@@ -4,11 +4,9 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  ImageBackground,
-  TouchableOpacity,
 } from 'react-native';
 
-import BookmarkCard from '../../../assets/image/bookmarkCard.png';
+import BookmarkCard from './BookmarkCard';
 
 const Bookmarks = (props) => (
   <View style={styles.bookmarks}>
@@ -23,24 +21,11 @@ const Bookmarks = (props) => (
       <ScrollView 
         horizontal={true} 
         showsHorizontalScrollIndicator={false}>
-        {/* Bookmark Card */}
-        <TouchableOpacity style={styles.bookmarkCard}>
-          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
-          </ImageBackground>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bookmarkCard}>
-          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
-          </ImageBackground>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bookmarkCard}>
-          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
-          </ImageBackground>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bookmarkCard}>
-          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
-          </ImageBackground>
-        </TouchableOpacity>
-
+        
+        <BookmarkCard/>
+        <BookmarkCard/>
+        <BookmarkCard/>
+        <BookmarkCard/>
       </ScrollView>
     </View>
 
@@ -72,13 +57,7 @@ const styles = StyleSheet.create({
   hasBookmarks: {
     height: '100%'
   },
-  bookmarkCard: {
-    width: 260,
-    height: 260,
-    marginLeft: 25,
-    borderRadius: 8,
-    backgroundColor: '#eee',
-  }
+
 })
 
 export default Bookmarks;
