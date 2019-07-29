@@ -5,10 +5,12 @@ import {
   Text, 
   View,
   Image,
+  ImageBackground,
   TouchableOpacity,
 } from 'react-native';
 
 import BookmarkButton from './assets/image/addBookmarkButton.png';
+import HeaderBackground from './assets/image/weatherHeader.png';
 
 export default class App extends Component {
   state = {
@@ -27,15 +29,17 @@ export default class App extends Component {
     return (!this.state.fontLoaded) ? null : (
       <View style={styles.container}>
 
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.greetText}>Good morning</Text>
-            <Text style={styles.infoText}>Today is 72&deg;F and Sunny</Text>
+        <ImageBackground source={HeaderBackground} style={styles.background} >
+          <View style={styles.header}>
+            <View>
+              <Text style={styles.greetText}>Good morning</Text>
+              <Text style={styles.infoText}>Today is 72&deg;F and Sunny</Text>
+            </View>
+            <TouchableOpacity>
+              <Image source={BookmarkButton} style={styles.bookmarkIcon}></Image>
+            </TouchableOpacity> 
           </View>
-          <TouchableOpacity>
-            <Image source={BookmarkButton} style={styles.bookmarkIcon}></Image>
-          </TouchableOpacity> 
-        </View>
+        </ImageBackground>
 
         <View>
 
@@ -52,6 +56,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '20%',
+    resizeMode: 'cover',
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -59,7 +69,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     width: '100%',
     height: '100%',
-    maxHeight: 300,
   },
   greetText: {
     fontFamily: 'Light',
