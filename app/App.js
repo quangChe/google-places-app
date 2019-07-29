@@ -2,14 +2,10 @@ import React, {Component} from 'react';
 import { Font } from 'expo';
 import { 
   StyleSheet, 
-  Text, 
   View,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
 } from 'react-native';
 
-import Header from './src/components/Header';
+import Header from './src/components/Header/Header';
 import Bookmarks from './src/components/Bookmarks/Bookmarks';
 
 export default class App extends Component {

@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import BookmarkButton from '../../assets/image/addBookmarkButton.png';
-import HeaderBackground from '../../assets/image/weatherHeader.png';
+import BookmarkButton from '../../../assets/image/addBookmarkButton.png';
+import HeaderBackground from '../../../assets/image/weatherHeader.png';
 
 const Header = (props) => (
   <ImageBackground source={HeaderBackground} style={styles.background} >
