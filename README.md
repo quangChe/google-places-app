@@ -10,13 +10,15 @@ TAPP Code Challenge for Software Engineer Candidates
 
 ## Candidate Information (Fill out with your info)
 
-Name: _Your Name_
+Name: Quang Che
 
-Email: _Your email_
+Email: quang.n.che@gmail.com  
 
-Resume: _link to your resume_
+Resume: https://www.dropbox.com/s/dgx28x4kq2x8bci/quang_resume.pdf?dl=0
 
-Additional: _Such as Github or LinkedIn, etc_
+Additional: 
+  https://www.linkedin.com/in/quangc/
+  https://github.com/quangChe
 
 ## Intro
 
