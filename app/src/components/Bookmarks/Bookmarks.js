@@ -6,7 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import BookmarkCard from './BookmarkCard';
+import BookmarkSlide from './BookmarkSlide';
 
 const Bookmarks = (props) => (
   <View style={styles.bookmarks}>
@@ -15,20 +15,7 @@ const Bookmarks = (props) => (
       <Text style={styles.big}>This trip is empty</Text>
       <Text style={styles.small}>Click the blue plus to pin a place</Text>
     </View> */}
-
-    <View style={styles.hasBookmarks}>
-      {/* Bookmark List */}
-      <ScrollView 
-        horizontal={true} 
-        showsHorizontalScrollIndicator={false}>
-        
-        <BookmarkCard/>
-        <BookmarkCard/>
-        <BookmarkCard/>
-        <BookmarkCard/>
-      </ScrollView>
-    </View>
-
+    <BookmarkSlide/>
   </View>
 );
 
@@ -54,10 +41,6 @@ const styles = StyleSheet.create({
     color: '#ACB7B9',
     fontSize: 13,
   },
-  hasBookmarks: {
-    height: '100%'
-  },
-
 })
 
 export default Bookmarks;
