@@ -27,9 +27,9 @@ const Header = (props) => (
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
+    flex: 2,
     width: '100%',
-    height: '20%',
+    height: '100%',
     resizeMode: 'cover',
   },
   header: {
