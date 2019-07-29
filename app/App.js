@@ -9,8 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import BookmarkButton from './assets/image/addBookmarkButton.png';
-import HeaderBackground from './assets/image/weatherHeader.png';
+import Header from './src/components/Header';
 
 export default class App extends Component {
   state = {
@@ -23,27 +22,17 @@ export default class App extends Component {
       'Medium': require('./assets/fonts/SFProDisplay-Medium.ttf')
     });
     this.setState({ fontLoaded: true });
+  } 
+
+  search = () => {
+    alert('Hello!');
   }
 
   render() {
     return (!this.state.fontLoaded) ? null : (
       <View style={styles.container}>
-
-        <ImageBackground source={HeaderBackground} style={styles.background} >
-          <View style={styles.header}>
-            <View>
-              <Text style={styles.greetText}>Good morning</Text>
-              <Text style={styles.infoText}>Today is 72&deg;F and Sunny</Text>
-            </View>
-            <TouchableOpacity>
-              <Image source={BookmarkButton} style={styles.bookmarkIcon}></Image>
-            </TouchableOpacity> 
-          </View>
-        </ImageBackground>
-
-        <View>
-
-        </View>
+        <Header pressBookmark={this.search}/>
+      
       </View>
     );
   }
@@ -56,32 +45,4 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '20%',
-    resizeMode: 'cover',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 60,
-    paddingHorizontal: 25,
-    width: '100%',
-    height: '100%',
-  },
-  greetText: {
-    fontFamily: 'Light',
-    color: '#0A0A0A',
-    fontSize: 32,
-  },
-  infoText: {
-    fontFamily: 'Medium',
-    color: '#383838',
-    fontSize: 13,
-  },
-  bookmarkIcon: {
-    maxWidth: 60,
-    maxHeight: 60,
-  }
 });
