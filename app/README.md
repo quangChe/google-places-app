@@ -16,8 +16,21 @@ Expo is a library of tools and services built around React Native to build nativ
 ```
 cd app
 npm install
-npm start // Optional flags: --ios || --android
+npm start
 ```
 
-Expo will build the project and open a DevTools interface inside your browser. The project app can then be inspected locally on iOS Simulator or Android Virtual Device. Atlernatively, Expo provides sets up a tunnel for viewing the app through a mobile device via the Expo app, which can be downloaded from the App Store or Google Play.
+Expo will build the project and open a DevTools interface inside your browser. The project app can then be inspected locally on the iOS Simulator, an Android Virtual Device, or through a mobile device with the Expo app. 
+
+### Using Android Studio Emulator
+
+To view app on an emulated Android device, you must install Android Studio and set up an Android Virtual Device (any device with the latest version of Android should work). More instructions can be found [here](https://docs.expo.io/versions/latest/workflow/android-studio-emulator/).
+
+
+### Using iOS Simulator
+
+To view app on an iOS Simulator, you will first need to install Xcode. More instructions can be found [here](https://docs.expo.io/versions/v33.0.0/workflow/ios-simulator/).
+
+### Using a Tunnel
+
+Atlernatively, Expo provides a tunnel for viewing the app through a mobile device that has the Expo app, which can be downloaded from the App Store or Google Play. In Expo's DevTools page opened on the browser, click 'Tunnel' and scan the QR code with your device's camera.
 
