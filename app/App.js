@@ -1,19 +1,15 @@
 import React, {Component} from 'react';
 import * as Font from 'expo-font';
 import { 
-  ImageBackground,
   StyleSheet, 
   View,
-  Text,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import BookmarkCardImg from './assets/image/bookmarkCard.png';
-import FooterBackground from './assets/image/tripBackground.png';
 
 import Header from './src/components/Header/Header';
 import Bookmarks from './src/components/Bookmarks/Bookmarks';
-
+import Footer from './src/components/Footer/Footer';
 
 export default class App extends Component {
   state = {
@@ -47,27 +43,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <Header pressBookmark={this.search}/>
         <Bookmarks bookmarks={this.state.bookmarks}/>
-        <View style={styles.footer}>
-          <ImageBackground source={FooterBackground} style={{width: '100%', height: '100%'}}>
-            <LinearGradient
-            colors={['#fff', 'rgba(255, 255, 255, 0)']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 0.4 }}
-            style={styles.footerOverlay}>
-              <LinearGradient
-                colors={['black', 'transparent']}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 0, y: 0.6 }}
-                style={styles.footerOverlay}>
-                <View style={styles.textBox}>
-                  <Text style={styles.textLrg}>Exploring LouisVille BBQ</Text>
-                  <Text style={styles.textSml}>LouisVille, Kentucky</Text>
-                </View>
-              </LinearGradient>
-            </LinearGradient>
-          </ImageBackground>
-        </View>
-
+        <Footer/>
       </View>
     );
   }
@@ -79,27 +55,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
   },
-  footer: {
-    flex: 4,
-  },
-  footerOverlay: {
-    flex: 1,
-  },
-  textBox: {
-    height: '100%',
-    width: '100%',
-    justifyContent: 'flex-end',
-    paddingLeft: 25,
-    paddingBottom: 59,
-  },
-  textLrg: {
-    fontFamily: 'Regular',
-    fontSize: 23,
-    color: '#fff',
-  },
-  textSml: {
-    fontFamily: 'Regular',
-    fontSize: 16,
-    color: 'rgba(212,201,215,1)',
-  }
+
 });
