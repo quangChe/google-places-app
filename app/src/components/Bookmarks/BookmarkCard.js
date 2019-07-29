@@ -1,13 +1,10 @@
 import React from 'react'
 import { 
-  View,
-  Text,
-  Image,
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import BookmarkCardImg from '../../../assets/image/bookmarkCard.png';
 
@@ -21,7 +18,7 @@ const BookmarkCard = (props) => (
         colors={['black', 'transparent']}
         start={{ x: 0, y: 1 }}
         end={{ x: 0, y: 0.6 }}>
-          <CardDetails/>
+          <CardDetails />
       </LinearGradient>
     </ImageBackground>
   </TouchableOpacity>
