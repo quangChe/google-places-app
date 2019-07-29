@@ -3,18 +3,45 @@ import {
   View,
   Text,
   StyleSheet,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
+
+import BookmarkCard from '../../../assets/image/bookmarkCard.png';
 
 const Bookmarks = (props) => (
   <View style={styles.bookmarks}>
 
-    <View style={styles.noBookmarks}>
+    {/* <View style={styles.noBookmarks}>
       <Text style={styles.big}>This trip is empty</Text>
       <Text style={styles.small}>Click the blue plus to pin a place</Text>
-    </View>
+    </View> */}
 
     <View style={styles.hasBookmarks}>
+      {/* Bookmark List */}
+      <ScrollView 
+        horizontal={true} 
+        showsHorizontalScrollIndicator={false}>
+        {/* Bookmark Card */}
+        <TouchableOpacity style={styles.bookmarkCard}>
+          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
+          </ImageBackground>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bookmarkCard}>
+          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
+          </ImageBackground>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bookmarkCard}>
+          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
+          </ImageBackground>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bookmarkCard}>
+          <ImageBackground source={BookmarkCard} style={{width: '100%', height: '100%'}}>
+          </ImageBackground>
+        </TouchableOpacity>
 
+      </ScrollView>
     </View>
 
   </View>
@@ -26,11 +53,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fdfdfd',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '30%',
+    height: '100%',
   },
   noBookmarks: {
-  },
-  hasBookmarks: {
   },
   big: {
     fontFamily: 'Regular',
@@ -44,6 +69,16 @@ const styles = StyleSheet.create({
     color: '#ACB7B9',
     fontSize: 13,
   },
+  hasBookmarks: {
+    height: '100%'
+  },
+  bookmarkCard: {
+    width: 260,
+    height: 260,
+    marginLeft: 25,
+    borderRadius: 8,
+    backgroundColor: '#eee',
+  }
 })
 
 export default Bookmarks;
