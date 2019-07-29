@@ -10,21 +10,25 @@ import {
 import GoIcon from '../../../assets/image/goIcon.png';
 import SmallHeartIcon from '../../../assets/image/smallHeartIcon.png';
 
-const CardDetails = (props) => (
-  <View style={styles.container}>
-    <View>
-      <View style={styles.detailBox}>
-        <Text style={styles.location}>Louiseville, Kentucky</Text>
-        <View style={styles.rating}>
-          <Image source={SmallHeartIcon} style={{ height: 7, width: 7 }}></Image>
-          <Text style={styles.score}>4.8</Text>
+const CardDetails = (props) => {
+  const { name, location, rating } = props;
+
+  return (
+    <View style={styles.container}>
+      <View>
+        <View style={styles.detailBox}>
+          <Text style={styles.location}>{ location }</Text>
+          <View style={styles.rating}>
+            <Image source={SmallHeartIcon} style={{ height: 7, width: 7 }}></Image>
+            <Text style={styles.score}>{ rating }</Text>
+          </View>
         </View>
+        <Text style={styles.name}>{ name }</Text>
       </View>
-      <Text style={styles.name}>Royals Hot Chicken</Text>
+      <Image source={GoIcon} style={{ height: 34, width: 34 }}></Image>
     </View>
-    <Image source={GoIcon} style={{ height: 34, width: 34 }}></Image>
-  </View>
-);
+  )
+};
 
 const styles = StyleSheet.create({
   container: {

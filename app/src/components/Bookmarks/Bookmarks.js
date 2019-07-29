@@ -2,22 +2,28 @@ import React from 'react';
 import {
   View,
   Text,
+  FlatList,
   StyleSheet,
-  ScrollView,
 } from 'react-native';
 
-import BookmarkSlide from './BookmarkSlide';
+import BookmarkCard from './BookmarkCard';
 
-const Bookmarks = (props) => (
-  <View style={styles.bookmarks}>
+const Bookmarks = (props) => {
+  const renderBookmarkCard = (info) => <BookmarkCard bookmark={info.item} pressBookmark={() => alert(info.item.key)}/>
 
-    {/* <View style={styles.noBookmarks}>
-      <Text style={styles.big}>This trip is empty</Text>
-      <Text style={styles.small}>Click the blue plus to pin a place</Text>
-    </View> */}
-    <BookmarkSlide/>
-  </View>
-);
+  return (props.bookmarks.length)
+    ? (<View style={styles.bookmarks}>
+        <FlatList 
+          horizontal={true} 
+          showsHorizontalScrollIndicator={false}
+          data={props.bookmarks}
+          renderItem={renderBookmarkCard}/>
+        </View>)
+    : (<View style={styles.bookmarks}>
+        <Text style={styles.bigText}>This trip is empty</Text>
+        <Text style={styles.smallText}>Click the blue plus to pin a place</Text>
+      </View>);
+};
 
 const styles = StyleSheet.create({
   bookmarks: {
@@ -27,15 +33,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
   },
-  noBookmarks: {
-  },
-  big: {
+  bigText: {
     fontFamily: 'Regular',
     textAlign: 'center',
     color: '#808080',
     fontSize: 18,
+    marginBottom: 7,
   },
-  small: {
+  smallText: {
     fontFamily: 'Regular',
     textAlign: 'center',
     color: '#ACB7B9',

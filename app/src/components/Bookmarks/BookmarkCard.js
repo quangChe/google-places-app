@@ -2,27 +2,29 @@ import React from 'react'
 import { 
   StyleSheet,
   ImageBackground,
-  TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import BookmarkCardImg from '../../../assets/image/bookmarkCard.png';
-
 import CardDetails from './CardDetails';
 
-const BookmarkCard = (props) => (
-  <TouchableOpacity style={styles.bookmarkCard}>
-    <ImageBackground source={BookmarkCardImg} style={styles.background}>
-      <LinearGradient
-        style={styles.contentBox}
-        colors={['black', 'transparent']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0, y: 0.6 }}>
-          <CardDetails />
-      </LinearGradient>
-    </ImageBackground>
-  </TouchableOpacity>
-);
+const BookmarkCard = (props) => {
+  const {image, details} = props.bookmark;
+
+  return (
+    <TouchableHighlight style={styles.bookmarkCard} onPress={props.pressBookmark}>
+      <ImageBackground source={image} style={styles.background}>
+        <LinearGradient
+          style={styles.contentBox}
+          colors={['black', 'transparent']}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 0, y: 0.6 }}>
+            <CardDetails {...details}/>
+        </LinearGradient>
+      </ImageBackground>
+    </TouchableHighlight>
+  );
+}
 
 const styles = StyleSheet.create({
   bookmarkCard: {
