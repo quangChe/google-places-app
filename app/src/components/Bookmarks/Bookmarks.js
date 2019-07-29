@@ -28,7 +28,7 @@ const Bookmarks = (props) => {
 const styles = StyleSheet.create({
   bookmarks: {
     flex: 4,
-    backgroundColor: '#fdfdfd',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
