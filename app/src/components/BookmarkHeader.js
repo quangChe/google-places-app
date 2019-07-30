@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import BookmarkButton from '../../../assets/image/addBookmarkButton.png';
-import HeaderBackground from '../../../assets/image/weatherHeader.png';
+import BookmarkButton from '../../assets/image/addBookmarkButton.png';
+import HeaderBackground from '../../assets/image/weatherHeader.png';
 
-const Header = (props) => (
+const BookmarkHeader = (props) => (
   <ImageBackground source={HeaderBackground} style={styles.background}>
     <LinearGradient
       colors={['#fff', 'rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0)']}
@@ -23,7 +23,7 @@ const Header = (props) => (
           <Text style={styles.greetText}>Good morning</Text>
           <Text style={styles.infoText}>Today is 72&deg;F and Sunny</Text>
         </View>
-        <TouchableOpacity onPress={props.pressBookmark}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Search')}>
           <Image source={BookmarkButton} style={styles.bookmarkIcon}></Image>
         </TouchableOpacity> 
       </View>
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Header;
+export default BookmarkHeader;

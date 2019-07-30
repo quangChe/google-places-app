@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import FooterBackground from '../../../assets/image/tripBackground.png';
+import FooterBackground from '../../assets/image/tripBackground.png';
 
 const Footer = () => (
   <View style={styles.container}>
