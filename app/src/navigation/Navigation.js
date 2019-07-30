@@ -11,15 +11,12 @@ const AppNavigator = createStackNavigator(
   {
     Bookmarks: {
       screen: BookmarkScreen,
-      path: 'bookmarks'
     },
     Search: {
       screen: SearchScreen,
-      path: 'search'
     },
     Place: {
       screen: PlaceViewScreen,
-      path: 'place'
     }
   },
   { 
