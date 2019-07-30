@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as Font from 'expo-font';
-import HomeScreen from './src/screens/HomeScreen';
+
+import AppNavigation from './src/navigation/Navigation';
 
 export default class App extends Component {
   state = {
@@ -18,7 +19,7 @@ export default class App extends Component {
   } 
 
   render() {
-    return (!this.state.fontLoaded) ? null : <HomeScreen/>;
+    return (!this.state.fontLoaded) ? null : <AppNavigation/>;
   }
 }
 
