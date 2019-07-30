@@ -18,6 +18,7 @@ import GoogleAttribution from '../../../assets/image/google_attribution.png';
 export default class SearchModal extends Component {
   state = {
     results: [],
+    displayAttribution: true,
   };
 
   autoComplete = async (val) => {
@@ -28,7 +29,9 @@ export default class SearchModal extends Component {
         description: place.description 
       };
     });
-    this.setState({results: places});
+
+    console.log(places);
+    this.setState({results: places, displayAttribution: false});
   }
 
   findPlace = async (event) => {
@@ -36,20 +39,42 @@ export default class SearchModal extends Component {
     const googRes = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${API_KEY}&inputtype=textquery&input=${val}`);
     const place = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${googRes.data.candidates[0].place_id}`);
     
-    // For PlaceScreen
-    console.log(place.data); 
+    this.setState({displayAttribution: false});
+
+    // For PlaceViewScreen
+    console.log('ONE', place.data); 
   }
 
-  render() {
-    const displayResults = (data) => (
-      <View style={styles.resultContainer}>
-        <Text style={styles.result}>{data.item.description}</Text>
-      </View>
-    );
+  findPlaceId = async (id) => {
+    const place = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${id}`);
     
-    const resultsList = (this.state.results.length) 
-      ? <FlatList data={this.state.results} renderItem={displayResults}/>
-      : <Image style={styles.attributionImg} source={GoogleAttribution}/>;
+    console.log('TWO', place.data); 
+  }
+
+  render() {    
+    const displayResults = (data) => {
+      const id = data.item.key;
+      
+      return (
+        <TouchableOpacity 
+          style={styles.resultContainer}
+          onPress={(id) => this.findPlaceId(id)}>
+          <Text style={styles.result}>{data.item.description}</Text>
+        </TouchableOpacity>
+      )
+    };
+
+    const { displayAttribution, results } = this.state;
+    let resultsList;
+
+
+    if (results.length) {
+      resultsList = <FlatList data={results} renderItem={displayResults}/>
+    } else {
+      resultsList = (displayAttribution) 
+        ? <Image style={styles.attributionImg} source={GoogleAttribution}/>
+        : <Text>No Results Found</Text>;
+    }
       
     return (
       <Modal
