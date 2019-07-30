@@ -69,11 +69,11 @@ export default class SearchModal extends Component {
 
 
     if (results.length) {
-      resultsList = <FlatList data={results} renderItem={displayResults}/>
+      resultsList = <FlatList data={results} renderItem={displayResults} keyboardShouldPersistTaps='handled'/>
     } else {
       resultsList = (displayAttribution) 
         ? <Image style={styles.attributionImg} source={GoogleAttribution}/>
-        : <Text>No Results Found</Text>;
+        : <Text style={styles.noResults}>No Results Found</Text>;
     }
       
     return (
@@ -168,6 +168,13 @@ const styles = StyleSheet.create({
   result: {
     fontFamily: 'Regular',
     fontSize: 17,
-    color: 'black'
+    color: '#333',
+  },
+  noResults: {
+    alignSelf: 'center',
+    fontFamily: 'Regular',
+    fontSize: 17,
+    margin: 20,
+    color: '#333',
   }
 });
