@@ -1,56 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
-  KeyboardAvoidingView,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
+  FlatList,
   TextInput, 
   Modal, 
   Image,
   Text,
   View, 
 } from 'react-native';
+import axios from 'axios';
+import { API_KEY } from '../../../API_KEY';
 
 import { Icon } from 'react-native-elements';
 import GoogleAttribution from '../../../assets/image/google_attribution.png';
 
-const SearchModal = (props) => {
-  return (
-    <Modal
-      presentationStyle='fullscreen'
-      animationType='slide'
-      transparent={false}
-      visible={props.open}>
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <View style={styles.inputBox}>
-            <Icon 
-              name='search'
-              color='#8E8E93'
-              size={19}/>
-            <TextInput
-              style={styles.inputField}
-              placeholder='Search'
-              autoFocus={true}
-              returnKeyType='go'/>
+export default class SearchModal extends Component {
+  state = {
+    predictions: [],
+  };
+
+  autoComplete = async (val) => {
+    const googRes = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${API_KEY}&input=${val}`);
+    const places = googRes.data.predictions.map(place => {
+      return { 
+        key: place.place_id,
+        description: place.description 
+      };
+    });
+    this.setState({predictions: places});
+  }
+
+  displayPredictions = (data) => {
+    const { item } = data;
+    return(
+      <View style={styles.resultContainer}>
+        <Text style={styles.result}>{item.description}</Text>
+      </View>
+    )
+  };
+
+  render() {
+    return (
+      <Modal
+        presentationStyle='fullscreen'
+        animationType='slide'
+        transparent={false}
+        visible={this.props.open}>
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBar}>
+            <View style={styles.inputBox}>
+              <Icon 
+                name='search'
+                color='#8E8E93'
+                size={19}/>
+              <TextInput
+                style={styles.inputField}
+                placeholder='Search'
+                autoFocus={true}
+                returnKeyType='go'
+                onChangeText={this.autoComplete}/>
+            </View>
+            <TouchableOpacity onPress={this.props.cancel}>
+              <Text style={styles.cancelBtn}>Cancel</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={props.cancel}>
-            <Text style={styles.cancelBtn}>Cancel</Text>
-          </TouchableOpacity>
         </View>
-      </View>
+  
+        <View style={styles.resultsContainer}>
+          {/* No search */}
+          {/* <Image style={styles.attributionImg} source={GoogleAttribution}/> */}
+  
+          {/* AutoComplete Results */}
+          <FlatList
+            data={this.state.predictions}
+            renderItem={this.displayPredictions}
+          />
 
-      <View style={styles.resultsContainer}>
-        {/* No search */}
-        <Image style={styles.attributionImg} source={GoogleAttribution}/>
-
-        {/* AutoComplete Results */}
-        <ScrollView>
-      
-        </ScrollView>
-      </View>
-    </Modal>
-  );
+        </View>
+      </Modal>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -110,7 +140,6 @@ const styles = StyleSheet.create({
   result: {
     fontFamily: 'Regular',
     fontSize: 17,
+    color: 'black'
   }
-})
-
-export default SearchModal;
+});
