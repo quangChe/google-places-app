@@ -17,10 +17,6 @@ export default class App extends Component {
     this.setState({ fontLoaded: true });
   } 
 
-  search = () => {
-    alert('Hello!');
-  }
-
   render() {
     return (!this.state.fontLoaded) ? null : <HomeScreen/>;
   }
