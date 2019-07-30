@@ -1,0 +1,1 @@
+export { addBookmark, removeBookmark, viewPlace } from './bookmarks';
