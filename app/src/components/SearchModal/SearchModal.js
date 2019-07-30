@@ -20,91 +20,40 @@ const SearchModal = (props) => {
       presentationStyle='fullscreen'
       animationType='slide'
       transparent={false}
-      visible={props.open}
-      onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
-      }}>
-      {/* <KeyboardAvoidingView 
-        behavior='height'
-        styles={styles.modalContainer}> */}
-        <View style={styles.searchContainer}>
-          <View style={styles.formContainer}>
-            <View style={styles.inputContainer}>
-              <Icon 
-                name='search'
-                color='#8E8E93'
-                size={19}/>
-              <TextInput
-                style={styles.input}
-                placeholder='Search'
-                autoFocus={true}
-                returnKeyType='go'/>
-            </View>
-            <TouchableOpacity onPress={props.cancel}>
-              <Text style={styles.btnText}>Cancel</Text>
-            </TouchableOpacity>
+      visible={props.open}>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBar}>
+          <View style={styles.inputBox}>
+            <Icon 
+              name='search'
+              color='#8E8E93'
+              size={19}/>
+            <TextInput
+              style={styles.inputField}
+              placeholder='Search'
+              autoFocus={true}
+              returnKeyType='go'/>
           </View>
+          <TouchableOpacity onPress={props.cancel}>
+            <Text style={styles.cancelBtn}>Cancel</Text>
+          </TouchableOpacity>
         </View>
+      </View>
 
-        <View style={styles.resultsContainer}>
-          {/* No search */}
-          <Image style={styles.attribution} source={GoogleAttribution}/>
+      <View style={styles.resultsContainer}>
+        {/* No search */}
+        <Image style={styles.attributionImg} source={GoogleAttribution}/>
 
-          {/* AutoComplete Results */}
-          {/* <ScrollView>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-            <View style={styles.searchMatches}>
-              <Text style={styles.matchItem}>Test</Text>
-            </View>
-          </ScrollView> */}
-        </View>
-      {/* </KeyboardAvoidingView> */}
+        {/* AutoComplete Results */}
+        <ScrollView>
+      
+        </ScrollView>
+      </View>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-  },
   searchContainer: {
     height: '16%',
     maxHeight: 140,
@@ -114,13 +63,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
-  formContainer: {
+  searchBar: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 10,
   },
-  inputContainer: {
+  inputBox: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -131,24 +80,19 @@ const styles = StyleSheet.create({
     marginRight: 12,
     width: '75%',
   },
-  icon: {
-    color: '#8E8E93',
-    height: 14,
-    width: 14,
-  },
-  input: {
+  inputField: {
     paddingLeft: 5,
     fontSize: 17,
     width: '90%',
     color: '#888',
     fontFamily: 'Regular',
   },
-  btnText: {
+  cancelBtn: {
     color: '#007AFF',
     fontSize: 17,
     fontFamily: 'Regular',
   },
-  attribution: {
+  attributionImg: {
     height: 18,
     width: 144,
     resizeMode: 'cover',
@@ -156,14 +100,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     tintColor: '#777'
   },
-  searchMatches: {
+  resultContainer: {
     width: '100%',
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
     paddingHorizontal: 10,
     paddingVertical: 15,
   },
-  matchItem: {
+  result: {
     fontFamily: 'Regular',
     fontSize: 17,
   }
