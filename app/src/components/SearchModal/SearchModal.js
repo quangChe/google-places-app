@@ -17,7 +17,7 @@ import GoogleAttribution from '../../../assets/image/google_attribution.png';
 
 export default class SearchModal extends Component {
   state = {
-    predictions: [],
+    results: [],
   };
 
   autoComplete = async (val) => {
@@ -28,19 +28,29 @@ export default class SearchModal extends Component {
         description: place.description 
       };
     });
-    this.setState({predictions: places});
+    this.setState({results: places});
   }
 
-  displayPredictions = (data) => {
-    const { item } = data;
-    return(
-      <View style={styles.resultContainer}>
-        <Text style={styles.result}>{item.description}</Text>
-      </View>
-    )
-  };
+  findPlace = async (event) => {
+    const val = event.nativeEvent.text;
+    const googRes = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${API_KEY}&inputtype=textquery&input=${val}`);
+    const place = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${googRes.data.candidates[0].place_id}`);
+    
+    // For PlaceScreen
+    console.log(place.data); 
+  }
 
   render() {
+    const displayResults = (data) => (
+      <View style={styles.resultContainer}>
+        <Text style={styles.result}>{data.item.description}</Text>
+      </View>
+    );
+    
+    const resultsList = (this.state.results.length) 
+      ? <FlatList data={this.state.results} renderItem={displayResults}/>
+      : <Image style={styles.attributionImg} source={GoogleAttribution}/>;
+      
     return (
       <Modal
         presentationStyle='fullscreen'
@@ -59,7 +69,8 @@ export default class SearchModal extends Component {
                 placeholder='Search'
                 autoFocus={true}
                 returnKeyType='go'
-                onChangeText={this.autoComplete}/>
+                onChangeText={this.autoComplete}
+                onSubmitEditing={this.findPlace}/>
             </View>
             <TouchableOpacity onPress={this.props.cancel}>
               <Text style={styles.cancelBtn}>Cancel</Text>
@@ -68,15 +79,7 @@ export default class SearchModal extends Component {
         </View>
   
         <View style={styles.resultsContainer}>
-          {/* No search */}
-          {/* <Image style={styles.attributionImg} source={GoogleAttribution}/> */}
-  
-          {/* AutoComplete Results */}
-          <FlatList
-            data={this.state.predictions}
-            renderItem={this.displayPredictions}
-          />
-
+          { resultsList }
         </View>
       </Modal>
     );

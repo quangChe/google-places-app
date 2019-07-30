@@ -7,7 +7,7 @@ import {
 import BookmarkCardImg from '../../assets/image/bookmarkCard.png';
 
 import Header from '../components/Header/Header';
-import Bookmarks from '../components/Bookmarks/Bookmarks';
+import BookmarkSlide from '../components/BookmarkSlide/BookmarkSlide';
 import Footer from '../components/Footer/Footer';
 import SearchModal from '../components/SearchModal/SearchModal';
 
@@ -32,7 +32,7 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Header pressBookmark={this.search}/>
-        <Bookmarks bookmarks={this.state.bookmarks}/>
+        <BookmarkSlide bookmarks={this.state.bookmarks}/>
         <Footer/>
         <SearchModal 
           open={this.state.searchModalOpen}
