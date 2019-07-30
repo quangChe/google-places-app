@@ -11,7 +11,7 @@ import BookmarkSlide from '../components/BookmarkSlide/BookmarkSlide';
 import Footer from '../components/Footer/Footer';
 import SearchModal from '../components/SearchModal/SearchModal';
 
-export default class HomeScreen extends Component {
+export default class BookmarkScreen extends Component {
   state = {
     bookmarks: [
       {key: '1', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
