@@ -6,9 +6,9 @@ import {
 
 import BookmarkCardImg from '../../assets/image/bookmarkCard.png';
 
-import Header from '../components/Header/Header';
+import Header from '../components/BookmarkHeader';
 import BookmarkSlide from '../components/BookmarkSlide/BookmarkSlide';
-import Footer from '../components/Footer/Footer';
+import Footer from '../components/BookmarkFooter';
 import SearchModal from '../components/SearchModal/SearchModal';
 
 export default class BookmarkScreen extends Component {
