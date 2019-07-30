@@ -9,7 +9,6 @@ import BookmarkCardImg from '../../assets/image/bookmarkCard.png';
 import Header from '../components/BookmarkHeader';
 import BookmarkSlide from '../components/BookmarkSlide/BookmarkSlide';
 import Footer from '../components/BookmarkFooter';
-import SearchModal from '../components/SearchModal/SearchModal';
 
 export default class BookmarkScreen extends Component {
   state = {
@@ -21,22 +20,15 @@ export default class BookmarkScreen extends Component {
       {key: '5', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
       {key: '6', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}}
     ],
-    searchModalOpen: false,
   };
 
-  search = () => this.setState({searchModalOpen: true});
-
-  cancelSearch = () => this.setState({searchModalOpen: false});
-
   render() {
+    const navigation = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Header pressBookmark={this.search}/>
+        <Header navigation={navigation} pressBookmark={this.search}/>
         <BookmarkSlide bookmarks={this.state.bookmarks}/>
         <Footer/>
-        <SearchModal 
-          open={this.state.searchModalOpen}
-          cancel={this.cancelSearch}/>
       </View>
     );
   };
