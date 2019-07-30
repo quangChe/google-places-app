@@ -8,7 +8,7 @@ import {
 
 import BookmarkCard from './BookmarkCard';
 
-const Bookmarks = (props) => {
+const BookmarkSlide = (props) => {
   const renderBookmarkCard = (info) => <BookmarkCard bookmark={info.item} pressBookmark={() => alert(info.item.key)}/>
 
   return (props.bookmarks.length)
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Bookmarks;
+export default BookmarkSlide;
