@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { 
-  TouchableOpacity,
   StyleSheet,
-  FlatList,
-  TextInput, 
-  Modal, 
-  Image,
-  Text,
+  Dimensions,
   View, 
 } from 'react-native';
-
 import axios from 'axios';
 import { API_KEY } from '../../API_KEY';
+import { connect } from 'react-redux';
+import { viewPlace } from '../store/actions';
 
 import SearchInput from '../components/SearchInput';
 import SearchResults from '../components/SearchResults';
 
-export default class SearchScreen extends Component {
+class SearchScreen extends Component {
   state = {
     results: [],
     displayAttribution: true,
+    deviceHeight: 0
   };
+  
+  componentDidMount() {
+    const { height } = Dimensions.get('screen');
+    this.setState({deviceHeight: height});
+  }
 
   autoComplete = async (val) => {
     const googRes = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${API_KEY}&input=${val}`);
@@ -41,10 +43,7 @@ export default class SearchScreen extends Component {
   }
 
   getPlaceDetails = async (id) => {
-    const place = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${id}`); 
-    
-    // TODO: Use Redux to store currently viewing place
-    console.log(place.data.result);
+    await this.props.getDetails(id, this.state.deviceHeight);
     this.props.navigation.navigate('Place');
   }
 
@@ -75,3 +74,9 @@ const styles = StyleSheet.create({
     flex: 1,
   }
 })
+
+const mapDispatchToProps = dispatch => ({
+  getDetails: (id, height) => dispatch(viewPlace(id, height)),
+})
+
+export default connect(null, mapDispatchToProps)(SearchScreen);
