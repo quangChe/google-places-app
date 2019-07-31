@@ -14,13 +14,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { addBookmark, removeBookmark } from '../store/actions';
 
 import PlaceViewHeader from '../components/PlaceViewHeader';
+import PlaceViewFooter from '../components/PlaceViewFooter';
 
 class PlaceViewScreen extends Component {
 
   placeNotBookmarked = () => {
-    return this.props.bookmarks.every(bookmark => {
-      return bookmark.key !== this.props.place.key;
-    });
+    if (!this.props.bookmarks.length) {
+      return true;
+    }
+
+    return this.props.bookmarks.every(bookmark => 
+      bookmark.key !== this.props.place.key
+    );
   }
 
   addBookmark = () => {
@@ -35,9 +40,7 @@ class PlaceViewScreen extends Component {
 
   render() {
     const { place } = this.props;
-    const unbookmarked = this.placeNotBookmarked();
-        // ? <Button title='Add bookmark' onPress={this.addBookmark}></Button>
-        // : <Button title='Remove bookmark' onPress={this.removeBookmark}></Button>;
+    const bookmarked = !this.placeNotBookmarked();
 
     return (
       <ImageBackground source={{uri: place.photo}} style={styles.container}>
@@ -54,9 +57,11 @@ class PlaceViewScreen extends Component {
             style={styles.overlay}>
 
             <PlaceViewHeader place={place}/>
-            <View style={styles.interactiveSection}>
-              
-            </View>
+            <PlaceViewFooter 
+              addBookmark={this.addBookmark}
+              removeBookmark={this.removeBookmark}
+              place={place} 
+              bookmarked={bookmarked}/>
 
           </LinearGradient>
         </LinearGradient>
@@ -73,14 +78,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-  },
-  interactiveSection: {
-    flex: 2,
-    width: '100%',
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-  },
+  }
 })
 
 const mapStateToProps = state => ({
