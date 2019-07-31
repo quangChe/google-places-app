@@ -13,7 +13,8 @@ export const addBookmark = (place) => {
 
 export const removeBookmark = (id) => {
   return {
-    type: REMOVE_BOOKMARK
+    type: REMOVE_BOOKMARK,
+    payload: id
   }
 }
 

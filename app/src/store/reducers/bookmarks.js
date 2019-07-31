@@ -23,7 +23,10 @@ const reducer = (state = initialState, action) => {
     case ADD_BOOKMARK:
       
     case REMOVE_BOOKMARK:
-
+      return {
+        ...state,
+        bookmarks: state.bookmarks.filter(bm => bm.key !== action.payload)
+      }
     case VIEW_PLACE_DETAILS:
 
     default: 
