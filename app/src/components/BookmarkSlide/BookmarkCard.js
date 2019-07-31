@@ -9,17 +9,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import CardDetails from './CardDetails';
 
 const BookmarkCard = (props) => {
-  const {image, details} = props.bookmark;
+  const { photo } = props.bookmark;
 
   return (
     <TouchableHighlight style={styles.bookmarkCard} onPress={props.pressBookmark}>
-      <ImageBackground source={image} style={styles.background}>
+      <ImageBackground source={{uri: photo}} style={styles.background}>
         <LinearGradient
           style={styles.contentBox}
           colors={['black', 'transparent']}
           start={{ x: 0, y: 1 }}
           end={{ x: 0, y: 0.6 }}>
-            <CardDetails {...details}/>
+            <CardDetails details={props.bookmark}/>
         </LinearGradient>
       </ImageBackground>
     </TouchableHighlight>

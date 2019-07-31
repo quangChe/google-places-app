@@ -10,19 +10,21 @@ import GoIcon from '../../../assets/image/goIcon.png';
 import SmallHeartIcon from '../../../assets/image/smallHeartIcon.png';
 
 const CardDetails = (props) => {
-  const { name, location, rating } = props;
+  const { details } = props;
 
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.detailBox}>
-          <Text style={styles.location}>{ location }</Text>
+          <Text style={styles.location}>
+            {details.city}{details.state !== '' ? <Text>,</Text> : null} {details.state}
+          </Text>
           <View style={styles.rating}>
             <Image source={SmallHeartIcon} style={{ height: 7, width: 7 }}></Image>
-            <Text style={styles.score}>{ rating }</Text>
+            <Text style={styles.score}>{ details.rating }</Text>
           </View>
         </View>
-        <Text style={styles.name}>{ name }</Text>
+        <Text style={styles.name}>{ details.name }</Text>
       </View>
       <Image source={GoIcon} style={{ height: 34, width: 34 }}></Image>
     </View>

@@ -5,8 +5,6 @@ import {
   VIEW_BOOKMARK_DETAILS,
 } from '../actions/actionTypes';
 
-import BookmarkCardImg from '../../../assets/image/bookmarkCard.png';
-
 const initialState = {
   bookmarks: [],
   currentlyViewing: null
@@ -28,8 +26,7 @@ const changeCurrentlyViewing = {
     currentlyViewing: payload
   }),
   bookmark: (state, payload) => {
-    const bookmarkFound = state.find(place => place.key === payload);
-    console.log(bookmarkFound);
+    const bookmarkFound = state.bookmarks.find(place => place.key === payload);
     return {
       ...state,
       currentlyViewing: bookmarkFound

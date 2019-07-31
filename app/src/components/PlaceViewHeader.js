@@ -19,7 +19,7 @@ const PlaceViewHeader = (props) => {
         <Image style={styles.backIcon} source={BackIcon}/>
       </TouchableOpacity>
       <View style={styles.detailsSection}>
-        <View>
+        <View style={styles.textLeft}>
           <Text style={styles.small}>
             {place.city}{place.state !== '' ? <Text>,</Text> : null} {place.state}
           </Text>
@@ -58,6 +58,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Regular',
     fontSize: 24,
     color: '#FFFFFF',
+  },
+  textLeft: {
+    marginRight: 4,
+    maxWidth: '80%',
   },
   ratingContainer: {
     flexDirection: 'row',

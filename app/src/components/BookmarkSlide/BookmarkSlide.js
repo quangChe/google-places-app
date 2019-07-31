@@ -12,11 +12,10 @@ import { viewBookmark } from '../../store/actions';
 
 import BookmarkCard from './BookmarkCard';
 
-
-const renderBookmarkCard = (data, navigation) => {
+const renderBookmarkCard = (data, props) => {
   const pressBookmark = async () => {
-    await props.viewBookmark();
-    return navigate('Place');
+    await props.viewBookmark(data.item.key);
+    return props.navigation.navigate('Place');
   };
 
   return <BookmarkCard bookmark={data.item} pressBookmark={pressBookmark}/>;
@@ -65,7 +64,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  viewBookmark: () => dispatch(viewBookmark)
+  viewBookmark: (key) => dispatch(viewBookmark(key))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(BookmarkSlide));

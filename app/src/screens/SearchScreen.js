@@ -40,8 +40,12 @@ class SearchScreen extends Component {
   findPlace = async (event) => {
     try {
       const key = await findPlace(event.nativeEvent.text);
-      this.setState({displayAttribution: false});
-      this.getPlaceDetails(key);
+      if (key === 'ZERO_RESULTS') { 
+        return this.setState({displayAttribution: false});
+      } else {
+        this.setState({displayAttribution: false});
+        this.getPlaceDetails(key);
+      }
     } catch (e) {
       console.log(e);
     }

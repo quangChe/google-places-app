@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   addressBox: {
     width: '90%',
     alignContent: 'flex-start',
-    marginBottom: '3%',
+    marginBottom: '2%',
   },
   landmark: {
     flexDirection: 'row',
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 16,
     borderRadius: 22.5,
-    marginTop: '6%',
-    marginBottom: '6%',
+    marginTop: '4%',
+    marginBottom: '4%',
   },
   removeButton: {
     backgroundColor: '#00FF1C',

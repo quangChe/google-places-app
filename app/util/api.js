@@ -13,7 +13,10 @@ export const placesAutocomplete = async (val) => {
 export const findPlace = async (val) => {
   try {
     const response = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${API_KEY}&inputtype=textquery&input=${val}`);
-    return response.data.candidates[0].place_id
+    if (!response.data.candidates.length) {
+      return 'ZERO_RESULTS';
+    }
+    return response.data.candidates[0].place_id;
   } catch (e) {
     console.error(e);
   }
@@ -23,11 +26,11 @@ export const getPlaceDetails = async (key, dimensions) => {
   try {
     const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${key}`); 
     const data = response.data.result;
-    let photo;
+    let photo = `https://picsum.photos/${dimensions.width}/${dimensions.height}`;
     
     if (data.photos && data.photos.length) {
       const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${data.photos[0].photo_reference}&maxheight=${dimensions.height}`);
-      photo = photoResponse.config.url;
+      photos = photoResponse.config.url;
     } 
 
     const mapSize = `${dimensions.width-40}x${Math.round(dimensions.height/5)}`;
@@ -37,7 +40,7 @@ export const getPlaceDetails = async (key, dimensions) => {
     return {
       key,
       map: mapUrl,
-      photo: photo || `https://picsum.photos/${dimensions.width}/${dimensions.height}`,
+      photo: photo,
       name: data.name || '',
       city: (data.address_components[3]) ? data.address_components[3].long_name : '',
       state: (data.address_components[5]) ? data.address_components[5].long_name : '',
