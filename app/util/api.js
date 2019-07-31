@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_KEY } from '../API_KEY';
+import PlaceHolderBackground from '../assets/image/placeholder.jpg';
 
 export const placesAutocomplete = async (val) => {
   try {
@@ -26,11 +27,11 @@ export const getPlaceDetails = async (key, dimensions) => {
   try {
     const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${key}`); 
     const data = response.data.result;
-    let photo = `https://picsum.photos/${dimensions.width}/${dimensions.height}`;
+    let photo = PlaceHolderBackground;
     
     if (data.photos && data.photos.length) {
       const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${data.photos[0].photo_reference}&maxheight=${dimensions.height}`);
-      photos = photoResponse.config.url;
+      photo = {uri: photoResponse.config.url};
     } 
 
     const mapSize = `${dimensions.width-40}x${Math.round(dimensions.height/5)}`;

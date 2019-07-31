@@ -43,7 +43,7 @@ class PlaceViewScreen extends Component {
     const bookmarked = !this.placeNotBookmarked();
 
     return (
-      <ImageBackground source={{uri: place.photo}} style={styles.container}>
+      <ImageBackground source={place.photo} style={styles.container}>
         {/* Background Section */}
         <LinearGradient
           colors={['black', 'transparent']}

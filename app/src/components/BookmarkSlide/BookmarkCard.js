@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   StyleSheet,
   ImageBackground,
-  TouchableHighlight,
+  TouchableOpacity
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -12,17 +12,17 @@ const BookmarkCard = (props) => {
   const { photo } = props.bookmark;
 
   return (
-    <TouchableHighlight style={styles.bookmarkCard} onPress={props.pressBookmark}>
-      <ImageBackground source={{uri: photo}} style={styles.background}>
+    <TouchableOpacity style={styles.bookmarkCard} onPress={props.pressBookmark}>
+      <ImageBackground source={photo} style={styles.background}>
         <LinearGradient
           style={styles.contentBox}
           colors={['black', 'transparent']}
           start={{ x: 0, y: 1 }}
-          end={{ x: 0, y: 0.6 }}>
+          end={{ x: 0, y: 0.4 }}>
             <CardDetails details={props.bookmark}/>
         </LinearGradient>
       </ImageBackground>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
