@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
     case ADD_BOOKMARK:
       return addBookmark(state, action.payload);
     case REMOVE_BOOKMARK:
-      return removeBookmark(state, payload);
+      return removeBookmark(state, action.payload);
     case VIEW_PLACE_DETAILS:
       return changeCurrentlyViewing.place(state, action.payload);
     case VIEW_BOOKMARK_DETAILS:

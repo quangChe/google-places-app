@@ -27,7 +27,7 @@ export const getPlaceDetails = async (key, height) => {
     
     if (data.photos && data.photos.length) {
       const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${data.photos[0].photo_reference}&maxheight=${height}`);
-      photo = photoResponse.url;
+      photo = photoResponse.config.url;
     } 
 
     return {

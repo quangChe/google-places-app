@@ -32,10 +32,7 @@ export const viewPlace = (key, deviceHeight) => {
   return async (dispatch) => {
     try {
       const placeDetails = await getPlaceDetails(key, deviceHeight);
-      dispatch({
-        type: VIEW_PLACE_DETAILS,
-        payload: placeDetails
-      })
+      return dispatch({ type: VIEW_PLACE_DETAILS, payload: placeDetails })
     } catch (e) {
       console.error(e);
     }
