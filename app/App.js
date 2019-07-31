@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import * as Font from 'expo-font';
+import { Provider } from 'react-redux';
+import configureStore from './src/store/configureStore';
 
 import AppNavigation from './src/navigation/Navigation';
+
+const Store = configureStore();
 
 export default class App extends Component {
   state = {
@@ -19,7 +23,9 @@ export default class App extends Component {
   } 
 
   render() {
-    return (!this.state.fontLoaded) ? null : <AppNavigation/>;
+    return (!this.state.fontLoaded) 
+      ? null 
+      : <Provider store={Store}><AppNavigation/></Provider>;
   }
 }
 

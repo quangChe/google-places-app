@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { withNavigation } from 'react-navigation';
 
 import BookmarkButton from '../../assets/image/addBookmarkButton.png';
 import HeaderBackground from '../../assets/image/weatherHeader.png';
@@ -62,4 +63,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default BookmarkHeader;
+export default withNavigation(BookmarkHeader);

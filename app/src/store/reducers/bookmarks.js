@@ -4,8 +4,17 @@ import {
   VIEW_PLACE_DETAILS
 } from '../actions/actionTypes';
 
+import BookmarkCardImg from '../../../assets/image/bookmarkCard.png';
+
 const initialState = {
-  bookmarks: [],
+  bookmarks: [
+    {key: '1', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
+    {key: '2', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
+    {key: '3', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
+    {key: '4', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
+    {key: '5', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
+    {key: '6', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}}
+  ],
   currentlyViewing: null
 }
 
@@ -16,7 +25,7 @@ const reducer = (state = initialState, action) => {
     case REMOVE_BOOKMARK:
 
     case VIEW_PLACE_DETAILS:
-      
+
     default: 
       return state;
   }

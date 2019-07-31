@@ -5,19 +5,25 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import BookmarkCard from './BookmarkCard';
 
-const BookmarkSlide = (props) => {
-  const renderBookmarkCard = (info) => <BookmarkCard bookmark={info.item} pressBookmark={() => alert(info.item.key)}/>
 
+const renderBookmarkCard = (data, navigation) => {
+  const navigate = navigation.navigate;
+  return <BookmarkCard bookmark={data.item} pressBookmark={() => navigate('Place')}/>;
+}
+
+const BookmarkSlide = (props) => {
   return (props.bookmarks.length)
     ? (<View style={styles.bookmarks}>
         <FlatList 
           horizontal={true} 
           showsHorizontalScrollIndicator={false}
           data={props.bookmarks}
-          renderItem={renderBookmarkCard}/>
+          renderItem={(item) => renderBookmarkCard(item, props.navigation)}/>
         </View>)
     : (<View style={styles.bookmarks}>
         <Text style={styles.bigText}>This trip is empty</Text>
@@ -48,4 +54,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default BookmarkSlide;
+const mapStateToProps = state => {
+  return {
+    bookmarks: state.bookmarks
+  }
+}
+
+export default connect(mapStateToProps)(withNavigation(BookmarkSlide));
