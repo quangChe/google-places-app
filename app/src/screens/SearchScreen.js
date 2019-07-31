@@ -16,12 +16,12 @@ class SearchScreen extends Component {
   state = {
     results: [],
     displayAttribution: true,
-    deviceHeight: 0
+    deviceDimensions: {}
   };
   
   componentDidMount() {
-    const { height } = Dimensions.get('screen');
-    this.setState({deviceHeight: height});
+    const { height, width } = Dimensions.get('screen');
+    this.setState({deviceDimensions: {height, width}});
   }
 
   autoComplete = async (val) => {
@@ -49,7 +49,7 @@ class SearchScreen extends Component {
 
   getPlaceDetails = async (key) => {
     try {
-      await this.props.getDetails(key, this.state.deviceHeight);
+      await this.props.getDetails(key, this.state.deviceDimensions);
       this.props.navigation.navigate('Place');
     } catch(e) {
       console.log(e);

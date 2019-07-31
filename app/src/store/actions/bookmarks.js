@@ -28,10 +28,10 @@ export const viewBookmark = (key) => {
   }
 }
 
-export const viewPlace = (key, deviceHeight) => {
+export const viewPlace = (key, deviceDimensions) => {
   return async (dispatch) => {
     try {
-      const placeDetails = await getPlaceDetails(key, deviceHeight);
+      const placeDetails = await getPlaceDetails(key, deviceDimensions);
       return dispatch({ type: VIEW_PLACE_DETAILS, payload: placeDetails })
     } catch (e) {
       console.error(e);
