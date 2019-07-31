@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { 
+  ImageBackground,
   StyleSheet,
   Text,
   View,
@@ -10,19 +11,34 @@ import { connect } from 'react-redux';
 import { addBookmark, removeBookmark } from '../store/actions';
 
 class PlaceViewScreen extends Component {
+
+  placeNotBookmarked = () => {
+    return this.props.bookmarks.every(bookmark => {
+      return bookmark.key !== this.props.place.key;
+    });
+  }
+
+  addBookmark = () => {
+    if (this.placeNotBookmarked()) {
+      this.props.addBookmark(this.props.place);
+    }
+  }
+
+  removeBookmark = () => {
+    this.props.removeBookmark(this.props.place.key)
+  }
+
   render() {
-    const { 
-      place,
-      bookmarks,
-      addBookmark, 
-      removeBookmark
-    } = this.props;
+    const { place } = this.props;
+
+    let BookmarkButton = (this.placeNotBookmarked())
+        ? <Button title='Add bookmark' onPress={this.addBookmark}></Button>
+        : <Button title='Remove bookmark' onPress={this.removeBookmark}></Button>;
+
     return (
-      <View style={styles.container}>
-        {/* <Text>Testing 123...</Text> */}
-        <Button title='Add bookmark' onPress={() => addBookmark(place)}></Button>
-        <Button title='Remove bookmark' onPress={() => removeBookmark(place.key)}></Button>
-      </View>
+      <ImageBackground source={{uri: place.photo}} style={styles.container}>
+        { BookmarkButton }
+      </ImageBackground>
     )
   }
 }
