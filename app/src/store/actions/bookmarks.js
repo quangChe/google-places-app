@@ -1,10 +1,11 @@
 import {
   ADD_BOOKMARK,
   REMOVE_BOOKMARK,
-  VIEW_PLACE_DETAILS
+  VIEW_PLACE_DETAILS,
+  VIEW_BOOKMARK_DETAILS,
 } from './actionTypes';
-import axios from 'axios';
-import { API_KEY } from '../../../API_KEY';
+import { getPlaceDetails } from '../../../util/api';
+
 
 export const addBookmark = (place) => {
   return {
@@ -13,21 +14,28 @@ export const addBookmark = (place) => {
   }
 }
 
-export const removeBookmark = (id) => {
+export const removeBookmark = (key) => {
   return {
     type: REMOVE_BOOKMARK,
-    payload: id
+    payload: key
   }
 }
 
-export const viewPlace = (key, height) => {
+export const viewBookmark = (key) => {
+  return {
+    type: VIEW_BOOKMARK_DETAILS,
+    payload: key
+  }
+}
+
+export const viewPlace = (key, deviceHeight) => {
   return async (dispatch) => {
     try {
-      const place = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${key}`); 
-      const photoRef = place.data.result.photos[0].photo_reference;
-      const photo = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${photoRef}&maxheight=${height}`)
-      // dispatch()
-      console.log(photo.config.url);
+      const placeDetails = await getPlaceDetails(key, deviceHeight);
+      dispatch({
+        type: VIEW_PLACE_DETAILS,
+        payload: placeDetails
+      })
     } catch (e) {
       console.error(e);
     }

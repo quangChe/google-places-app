@@ -19,20 +19,20 @@ export const findPlace = async (val) => {
   }
 }
 
-export const getPlaceDetails = async (id, height) => {
+export const getPlaceDetails = async (key, height) => {
   try {
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${id}`); 
+    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${API_KEY}&placeid=${key}`); 
     const data = response.data.result;
-    let photoUrl = null;
+    let photo;
     
     if (data.photos && data.photos.length) {
-      const photo = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${data.photos[0].photo_reference}&maxheight=${height}`);
-      photoUrl = photo.url;
+      const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${data.photos[0].photo_reference}&maxheight=${height}`);
+      photo = photoResponse.url;
     } 
 
     return {
-      key: id,
-      photo: photoUrl,
+      key,
+      photo,
       name: data.name,
       city: data.address_components[3].long_name,
       state: data.address_components[5].long_name,

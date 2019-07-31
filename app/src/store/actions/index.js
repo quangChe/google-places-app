@@ -1,1 +1,5 @@
-export { addBookmark, removeBookmark, viewPlace } from './bookmarks';
+export { 
+  addBookmark, 
+  removeBookmark, 
+  viewBookmark,
+  viewPlace } from './bookmarks';

@@ -8,12 +8,18 @@ import {
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 
+import { viewBookmark } from '../../store/actions';
+
 import BookmarkCard from './BookmarkCard';
 
 
 const renderBookmarkCard = (data, navigation) => {
-  const navigate = navigation.navigate;
-  return <BookmarkCard bookmark={data.item} pressBookmark={() => navigate('Place')}/>;
+  const pressBookmark = async () => {
+    await props.viewBookmark();
+    return navigate('Place');
+  };
+
+  return <BookmarkCard bookmark={data.item} pressBookmark={pressBookmark}/>;
 }
 
 const BookmarkSlide = (props) => {
@@ -23,7 +29,7 @@ const BookmarkSlide = (props) => {
           horizontal={true} 
           showsHorizontalScrollIndicator={false}
           data={props.bookmarks}
-          renderItem={(item) => renderBookmarkCard(item, props.navigation)}/>
+          renderItem={(item) => renderBookmarkCard(item, props)}/>
         </View>)
     : (<View style={styles.bookmarks}>
         <Text style={styles.bigText}>This trip is empty</Text>
@@ -54,10 +60,12 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = state => {
-  return {
-    bookmarks: state.bookmarks
-  }
-}
+const mapStateToProps = state => ({
+  bookmarks: state.bookmarks
+})
 
-export default connect(mapStateToProps)(withNavigation(BookmarkSlide));
+const mapDispatchToProps = dispatch => ({
+  viewBookmark: () => dispatch(viewBookmark)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(BookmarkSlide));

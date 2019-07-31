@@ -4,9 +4,9 @@ import {
   Dimensions,
   View, 
 } from 'react-native';
-import axios from 'axios';
-import { API_KEY } from '../../API_KEY';
 import { connect } from 'react-redux';
+
+import { placesAutocomplete, findPlace } from '../../util/api';
 import { viewPlace } from '../store/actions';
 
 import SearchInput from '../components/SearchInput';
@@ -25,26 +25,35 @@ class SearchScreen extends Component {
   }
 
   autoComplete = async (val) => {
-    const googRes = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${API_KEY}&input=${val}`);
-    const places = googRes.data.predictions.map(place => {
-      return { 
+    try {
+      const data = await placesAutocomplete(val);
+      const places = data.map(place => ({
         key: place.place_id,
         description: place.description 
-      };
-    });
-    this.setState({results: places, displayAttribution: false});
+      }));
+      this.setState({results: places, displayAttribution: false});
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   findPlace = async (event) => {
-    const val = event.nativeEvent.text;
-    const googRes = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${API_KEY}&inputtype=textquery&input=${val}`);
-    this.setState({displayAttribution: false});
-    this.getPlaceDetails(googRes.data.candidates[0].place_id);
+    try {
+      const key = await findPlace(event.nativeEvent.text);
+      this.setState({displayAttribution: false});
+      this.getPlaceDetails(key);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  getPlaceDetails = async (id) => {
-    await this.props.getDetails(id, this.state.deviceHeight);
-    this.props.navigation.navigate('Place');
+  getPlaceDetails = async (key) => {
+    try {
+      await this.props.getDetails(key, this.state.deviceHeight);
+      this.props.navigation.navigate('Place');
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   cancelSearch = () => {
@@ -76,7 +85,7 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getDetails: (id, height) => dispatch(viewPlace(id, height)),
+  getDetails: (key, height) => dispatch(viewPlace(key, height)),
 })
 
 export default connect(null, mapDispatchToProps)(SearchScreen);

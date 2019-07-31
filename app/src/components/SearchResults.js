@@ -11,12 +11,12 @@ import {
 import GoogleAttribution from '../../assets/image/google_attribution.png';
 
 const displayResultItems = (data, onClick) => {
-  const id = data.item.key;
+  const key = data.item.key;
 
   return (
     <TouchableOpacity 
       style={styles.resultContainer}
-      onPress={() => onClick(id)}>
+      onPress={() => onClick(key)}>
       <Text style={styles.result}>{data.item.description}</Text>
     </TouchableOpacity>
   )

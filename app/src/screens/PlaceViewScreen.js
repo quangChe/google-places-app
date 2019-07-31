@@ -4,8 +4,10 @@ import {
   Text,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class PlaceViewScreen extends Component {
+class PlaceViewScreen extends Component {
+
   render() {
     return (
       <View style={styles.container}>
@@ -22,3 +24,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
+
+const mapStateToProps = state => ({
+  place: state.currentlyViewing
+})
+
+export default connect(mapStateToProps)(PlaceViewScreen);

@@ -1,37 +1,52 @@
 import {
   ADD_BOOKMARK,
   REMOVE_BOOKMARK,
-  VIEW_PLACE_DETAILS
+  VIEW_PLACE_DETAILS,
+  VIEW_BOOKMARK_DETAILS,
 } from '../actions/actionTypes';
 
 import BookmarkCardImg from '../../../assets/image/bookmarkCard.png';
 
 const initialState = {
-  bookmarks: [
-    {key: '1', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
-    {key: '2', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
-    {key: '3', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
-    {key: '4', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
-    {key: '5', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}},
-    {key: '6', image: BookmarkCardImg, details: { name: 'Royals Hot Chicken', rating: 4.3, location: 'Louisville, Kentucky'}}
-  ],
+  bookmarks: [],
   currentlyViewing: null
 }
+
+const addBookmark = (state, payload) => ({
+  ...state,
+  bookmarks: state.bookmarks.concat(payload)
+});
+
+const removeBookmark = (state, payload) => ({
+  ...state,
+  bookmarks: state.bookmarks.filter(bm => bm.key !== payload)
+});
+
+const changeCurrentlyViewing = {
+  place: (state, payload) => ({
+    ...state,
+    currentlyViewing: payload
+  }),
+  bookmark: (state, payload) => {
+    const bookmarkFound = state.find(place => place.key === payload);
+    console.log(bookmarkFound);
+    return {
+      ...state,
+      currentlyViewing: bookmarkFound
+    }
+  },
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOKMARK:
-      return {
-        state,
-        bookmarks: state.bookmarks.concat(action.payload)
-      };
+      return addBookmark(state, action.payload);
     case REMOVE_BOOKMARK:
-      return {
-        ...state,
-        bookmarks: state.bookmarks.filter(bm => bm.key !== action.payload)
-      };
+      return removeBookmark(state, payload);
     case VIEW_PLACE_DETAILS:
-
+      return changeCurrentlyViewing.place(state, action.payload);
+    case VIEW_BOOKMARK_DETAILS:
+      return changeCurrentlyViewing.bookmark(state, action.payload);
     default: 
       return state;
   }
