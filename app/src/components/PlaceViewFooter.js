@@ -15,15 +15,15 @@ const PlaceViewFooter = (props) => {
 
   const BookmarkButton = (bookmarked) 
     ? (<TouchableOpacity
-        style={[styles.removeButton, styles.bookmarkButton]} 
-        onPress={removeBookmark}>
-        <Image source={PinIcon} style={styles.checkIcon}/>
-        <Text style={[{color: '#1C1F1F'}, styles.buttonText]}>Pinned To Trip</Text>
+          style={[styles.removeButton, styles.bookmarkButton]} 
+          onPress={removeBookmark}>
+            <Image source={CheckMark} style={styles.checkIcon}/>
+            <Text style={[{color: '#1C1F1F'}, styles.buttonText]}>Pinned To Trip</Text>
       </TouchableOpacity>)
     : (<TouchableOpacity
-        style={[styles.addButton, styles.bookmarkButton]} 
-        onPress={addBookmark}>
-        <Text style={[{color: '#FFFFFF'}, styles.buttonText]}>Pin To Trip</Text>
+          style={[styles.addButton, styles.bookmarkButton]} 
+          onPress={addBookmark}>
+          <Text style={[{color: '#FFFFFF'}, styles.buttonText]}>Pin To Trip</Text>
       </TouchableOpacity>);
 
   return (
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   address: {
     fontFamily: 'Regular',
-    fontSize: 10,
+    fontSize: 11,
     color: '#030303'
   },
   map: {
@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingVertical: 14,
+    paddingTop: 12,
+    paddingBottom: 16,
     borderRadius: 22.5,
     marginTop: '6%',
     marginBottom: '6%',
