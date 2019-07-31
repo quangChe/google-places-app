@@ -1,6 +1,6 @@
 # Place Bookmarks
 
-React Native app built with assets from ../design and instructions from ../README.md.
+This is a React Native mobile app for searching and bookmarking places. It has great look and feel to it and uses powerful Google Places API and Google Static Maps API for location search and insights.
 
 
 ## Getting Started
@@ -16,9 +16,12 @@ Expo is an ecosystem of tools and services built around React Native to develop 
 ```
 cd app/
 touch API_KEY.js // On mac
+```
 
-// inside API_KEY.js
-API_KEY=[Your Google API key (with Places API enabled)]
+**app/API_KEY.js**
+```
+export const API_KEY= // Your Google API key (with Places API enabled)
+
 ```
 
 ### 3. Boot Up Expo Dev Tools
