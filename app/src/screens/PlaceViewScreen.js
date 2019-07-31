@@ -3,15 +3,25 @@ import {
   StyleSheet,
   Text,
   View,
+  Button,
 } from 'react-native';
 import { connect } from 'react-redux';
 
-class PlaceViewScreen extends Component {
+import { addBookmark, removeBookmark } from '../store/actions';
 
+class PlaceViewScreen extends Component {
   render() {
+    const { 
+      place,
+      bookmarks,
+      addBookmark, 
+      removeBookmark
+    } = this.props;
     return (
       <View style={styles.container}>
-        <Text>Testing 123...</Text>
+        {/* <Text>Testing 123...</Text> */}
+        <Button title='Add bookmark' onPress={() => addBookmark(place)}></Button>
+        <Button title='Remove bookmark' onPress={() => removeBookmark(place.key)}></Button>
       </View>
     )
   }
@@ -26,7 +36,13 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
+  bookmarks: state.bookmarks,
   place: state.currentlyViewing
 })
 
-export default connect(mapStateToProps)(PlaceViewScreen);
+const mapDispatchToProps = dispatch => ({
+  addBookmark: (place) => dispatch(addBookmark(place)),
+  removeBookmark: (key) => dispatch(removeBookmark(key))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceViewScreen);
