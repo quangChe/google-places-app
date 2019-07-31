@@ -21,12 +21,15 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOKMARK:
-      
+      return {
+        state,
+        bookmarks: state.bookmarks.concat(action.payload)
+      };
     case REMOVE_BOOKMARK:
       return {
         ...state,
         bookmarks: state.bookmarks.filter(bm => bm.key !== action.payload)
-      }
+      };
     case VIEW_PLACE_DETAILS:
 
     default: 

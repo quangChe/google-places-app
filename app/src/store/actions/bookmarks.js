@@ -7,7 +7,8 @@ import {
 
 export const addBookmark = (place) => {
   return {
-    type: ADD_BOOKMARK
+    type: ADD_BOOKMARK,
+    payload: place,
   }
 }
 
