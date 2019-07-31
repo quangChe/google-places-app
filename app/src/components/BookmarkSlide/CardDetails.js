@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     color: '#ACB7B9',
     fontSize: 10,
     marginRight: 3,
+    maxWidth: '80%',
   },
   rating: {
     flexDirection: 'row',
